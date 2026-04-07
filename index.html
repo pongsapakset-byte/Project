@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sripatum Hotel System</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    background: linear-gradient(180deg,#0b0b0b,#050505);
+    color:white;
+    font-family:Segoe UI;
+}
+
+/* Navbar */
+.navbar{
+    background:rgba(0,0,0,0.8);
+    backdrop-filter:blur(10px);
+}
+
+/* Hero */
+.hero{
+    min-height:100vh;
+    position:relative;
+    background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    url('background.jpg') center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    backdrop-filter: blur(3px);
+    z-index:0;
+}
+
+.hero *{
+    position:relative;
+    z-index:1;
+}
+
+.hero h1{
+    font-size: clamp(32px, 6vw, 65px);
+    color:gold;
+    text-shadow:0 0 20px rgba(255,215,0,0.4);
+}
+
+.hero p{
+    max-width:600px;
+    margin:auto;
+    color:#ccc;
+}
+
+/* Section */
+.section{
+    padding:60px 15px;
+}
+
+/* Cards */
+.room-card{
+    background:linear-gradient(145deg,#111,#1a1a1a);
+    border-radius:15px;
+    overflow:hidden;
+    transition:0.3s;
+    cursor:pointer;
+}
+.room-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 30px rgba(255,215,0,0.3);
+}
+.room-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+/* Button */
+.btn-gold{
+    background:linear-gradient(45deg,gold,orange);
+    border:none;
+    color:black;
+    font-weight:bold;
+}
+.btn-gold:hover{
+    box-shadow:0 0 20px gold;
+    transform:scale(1.03);
+}
+
+/* Contact */
+.contact-box{
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid gold;
+}
+
+/* Footer */
+footer{
+    background:black;
+    padding:20px;
+    text-align:center;
+    border-top:1px solid gold;
+}
+
+/* Menu hover */
+.nav-link:hover{
+    color:gold !important;
+    text-shadow:0 0 10px gold;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark fixed-top navbar-expand-lg">
+<div class="container-fluid">
+
+<div class="d-flex align-items-center">
+<img src="logo.png" style="height:60px; margin-right:10px;">
+<div>
+<span class="navbar-brand text-warning m-0 fw-bold">
+Sripatum Hotel
+</span>
+<br>
+<small class="text-light">Booking System</small>
+</div>
+</div>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse justify-content-end" id="menu">
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link text-light" href="#">Home</a></li>
+<li class="nav-item"><a class="nav-link text-light" href="#booking">Booking</a></li>
+<li class="nav-item"><a class="nav-link text-light" href="#contact">Contact</a></li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+<div>
+    <h1>Sripatum Hotel Booking</h1>
+    <p>ระบบจองโรงแรมออนไลน์ รองรับทุกอุปกรณ์</p>
+    <a href="#booking" class="btn btn-gold mt-3">Start Booking</a>
+</div>
+</section>
+
+<!-- Booking -->
+<section id="booking" class="section container">
+
+<h2 class="text-center text-warning mb-4">Select Room</h2>
+
+<div class="row g-4">
+
+<div class="col-12 col-md-6 col-lg-4">
+<div class="room-card p-2" onclick="selectRoom(500,'Standard')">
+<img src="j2.jpg">
+<div class="p-3 text-center">
+<h5>Standard</h5>
+<p>500 บาท/คืน</p>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4">
+<div class="room-card p-2" onclick="selectRoom(1000,'Deluxe')">
+<img src="j3.jpg">
+<div class="p-3 text-center">
+<h5>Deluxe</h5>
+<p>1000 บาท/คืน</p>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4">
+<div class="room-card p-2" onclick="selectRoom(2000,'Suite')">
+<img src="j4.jpg">
+<div class="p-3 text-center">
+<h5>Suite</h5>
+<p>2000 บาท/คืน</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="mt-4">
+<input type="date" id="checkin" class="form-control mb-2">
+<input type="date" id="checkout" class="form-control mb-2">
+<input type="number" id="people" class="form-control mb-2" value="1">
+<button onclick="calculate()" class="btn btn-gold w-100">Confirm Booking</button>
+</div>
+
+<h4 class="mt-4 text-center" id="result"></h4>
+
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section container">
+
+<h2 class="text-center text-warning mb-5">Contact & Location</h2>
+
+<div class="row g-4 align-items-stretch">
+
+<div class="col-12 col-md-6">
+<div class="contact-box h-100 d-flex flex-column justify-content-center">
+<p>📧 Email: sripatum@email.com</p>
+<p>📞 Phone: 039-969-9555</p>
+<p>🏫 Sripatum Hotel</p>
+<p class="text-muted mt-3">
+Located near Sripatum University, Bangkok.
+</p>
+</div>
+</div>
+
+<div class="col-12 col-md-6">
+<div class="contact-box p-0 overflow-hidden h-100">
+<iframe 
+src="https://www.google.com/maps?q=13.8554,100.5843&output=embed"
+style="width:100%; height:100%; min-height:350px; border:0;">
+</iframe>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+<p>© 2026 Sripatum Hotel Booking System</p>
+<p>Developed by Pongsapak</p>
+</footer>
+
+<script>
+let price=0, room="";
+
+function selectRoom(p,name){
+    price=p;
+    room=name;
+    alert("เลือก "+name);
+}
+
+function calculate(){
+    let c=new Date(checkin.value);
+    let o=new Date(checkout.value);
+    let diff=(o-c)/(1000*60*60*24);
+
+    if(price==0) return alert("เลือกห้องก่อน");
+    if(diff<=0) return alert("วันไม่ถูกต้อง");
+
+    let total=diff*price;
+    result.innerHTML=`ห้อง: ${room} | ${diff} คืน | ${total} บาท`;
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
