@@ -94,7 +94,8 @@
         .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
 
         .contact-icon { font-size: 24px; color: var(--gold); margin-right: 15px; width: 30px; text-align: center; }
-        .map-container { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
+        .map-container { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); transition: 0.3s; }
+        .map-container:hover { border-color: var(--gold); transform: scale(1.01); }
 
         #loginPage { 
             display: none; position:fixed; width:100%; height:100%; 
@@ -214,12 +215,13 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-5">
                 <h3 class="mb-4 text-white">Sripatum Luxury Hotel</h3>
-                <p class="text-light fw-light mb-5">Experience unparalleled luxury in the heart of the city. Our dedicated team is here to ensure your stay is flawless.</p>
+                <p class="text-light fw-light mb-5">สัมผัสประสบการณ์ความหรูหราที่เหนือระดับ ใจกลางย่านบางเขน พร้อมการบริการที่คุณจะประทับใจไม่รู้ลืม</p>
+                
                 <div class="d-flex align-items-center mb-4">
                     <i class="fas fa-map-marker-alt contact-icon"></i>
                     <div>
                         <span class="text-warning d-block small uppercase">Location</span>
-                        <span class="text-white fw-light">Sripatum University, Bangkok, Thailand</span>
+                        <span class="text-white fw-light">61 ถ. พหลโยธิน แขวงเสนานิคม เขตจตุจักร กรุงเทพฯ 10900</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-4">
@@ -237,15 +239,17 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col-lg-7">
-                <div class="map-container">
+                <div class="map-container shadow-lg" style="border-radius: 20px; overflow: hidden; height: 450px; border: 1px solid var(--border); position: relative;">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m12!1m3!1d3874.321855648!2d100.5828453!3d13.84786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d10e0600001%3A0x77c22501a4e69d7a!2sSripatum%20University!5e0!3m2!1sen!2sth!4v1712610000000!5m2!1sen!2sth" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.331184310534!2d100.58249077581373!3d13.849122395047864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d3000000001%3A0x19213509172462e2!2z4มหาวิทยาลัยศรีปทุม Sripatum University!5e0!3m2!1sth!2sth!4v1710000000000!5m2!1sth!2sth" 
                         width="100%" 
-                        height="450" 
-                        style="border:0; filter: grayscale(1) invert(0.9) contrast(1.2) opacity(0.8);" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(0.5) invert(0.92) contrast(1.2) hue-rotate(180deg);" 
                         allowfullscreen="" 
-                        loading="lazy">
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
             </div>
