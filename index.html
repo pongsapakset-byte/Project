@@ -1,259 +1,351 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sripatum Luxury Hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<title>Sripatum Hotel System</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f9d976;
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(212, 175, 55, 0.15);
+        }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        html { scroll-behavior: smooth; }
+        body { 
+            background: var(--dark-bg); 
+            color: #e0e0e0; 
+            font-family: 'Prompt', sans-serif; 
+            overflow-x: hidden;
+        }
 
-<style>
-html{ scroll-behavior:smooth; }
+        h1, h2, h3, h4, .navbar-brand { font-family: 'Playfair Display', serif; }
 
-body{
-    background: linear-gradient(180deg,#0b0b0b,#050505);
-    color:white;
-    font-family:Segoe UI;
-}
+        .navbar { 
+            background: rgba(0,0,0,0.85) !important; 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+        .navbar-brand { font-size: 24px; letter-spacing: 2px; }
+        .nav-link { font-weight: 300; letter-spacing: 1px; }
 
-.navbar{
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(10px);
-}
+        .hero { 
+            min-height: 100vh; 
+            background: linear-gradient(rgba(0,0,0,0.4), var(--dark-bg)), url('background.jpg') center/cover no-repeat; 
+            display: flex; align-items: center; justify-content: center; text-align: center; 
+        }
+        .hero h1 { 
+            font-size: clamp(40px, 8vw, 90px); 
+            color: white;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
 
-.hero{
-    min-height:100vh;
-    background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.9)),
-    url('background.jpg') center/cover no-repeat;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-}
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
 
-.hero h1{
-    font-size:60px;
-    color:gold;
-}
+        .room-card { 
+            background: rgba(255,255,255,0.02); 
+            border-radius: 25px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .room-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            border-color: var(--gold);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+        .room-card img { transition: 0.8s; }
+        .room-card:hover img { transform: scale(1.1); filter: brightness(0.7); }
 
-.room-card{
-    background:#111;
-    border-radius:15px;
-    cursor:pointer;
-    transition:0.3s;
-}
-.room-card:hover{
-    transform:translateY(-10px) scale(1.03);
-    box-shadow:0 10px 30px rgba(255,215,0,0.4);
-}
+        .form-control {
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
+            color: white !important;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-weight: 300;
+        }
+        .form-control:focus { border-color: var(--gold) !important; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2) !important; }
 
-.btn-gold{
-    background:linear-gradient(45deg,gold,orange);
-    border:none;
-    color:black;
-    font-weight:bold;
-}
+        .btn-gold { 
+            background: linear-gradient(135deg, #b8860b 0%, #f9d976 50%, #b8860b 100%); 
+            border: none; color: #000; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 2px;
+            border-radius: 12px; transition: 0.4s;
+        }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); filter: brightness(1.1); }
 
-.social-box{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
+        .contact-icon { font-size: 24px; color: var(--gold); margin-right: 15px; width: 30px; text-align: center; }
+        .map-container { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
 
-.social-btn{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:#f1f1f1;
-    color:#333;
-    padding:10px 18px;
-    border-radius:25px;
-    text-decoration:none;
-}
+        #loginPage { 
+            display: none; position:fixed; width:100%; height:100%; 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(15px);
+            align-items:center; justify-content:center; z-index:9999; 
+        }
 
-.social-btn:hover{
-    background:gold;
-    color:black;
-}
-</style>
-
+        .fade-up { opacity:0; transform:translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.show { opacity:1; transform:translateY(0); }
+        section { padding: 100px 0; }
+    </style>
 </head>
 
 <body>
 
-<!-- Navbar -->
+<div id="loginPage">
+    <div class="glass-panel" style="width: 400px; text-align: center;">
+        <h3 class="text-warning mb-4">Management Login</h3>
+        <input id="user" placeholder="Admin Email" class="form-control mb-3">
+        <input id="pass" type="password" placeholder="Password" class="form-control mb-4">
+        <button onclick="login()" class="btn btn-gold w-100 mb-3">Sign In</button>
+        <button onclick="document.getElementById('loginPage').style.display='none'" class="btn btn-link text-secondary text-decoration-none small">Back to Site</button>
+    </div>
+</div>
+
 <nav class="navbar navbar-dark fixed-top navbar-expand-lg">
-<div class="container-fluid">
-
-<span class="navbar-brand text-warning">Sripatum Hotel</span>
-
-<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse justify-content-end" id="menu">
-<ul class="navbar-nav">
-<li class="nav-item"><a class="nav-link text-light" href="#">Home</a></li>
-<li class="nav-item"><a class="nav-link text-light" href="#booking">Booking</a></li>
-<li class="nav-item"><a class="nav-link text-light" href="#contact">Contact</a></li>
-</ul>
-
-<button onclick="logout()" class="btn btn-outline-warning ms-3">Logout</button>
-
-</div>
-</div>
+    <div class="container">
+        <span class="navbar-brand text-warning fw-bold">SRIPATUM LUXURY</span>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse justify-content-end" id="menu">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item"><a class="nav-link px-3" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#booking">Booking</a></li>
+                <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                <button onclick="document.getElementById('loginPage').style.display='flex'" class="btn btn-outline-warning ms-lg-4 px-4 btn-sm">Staff Login</button>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<!-- Login -->
-<div id="loginPage" style="position:fixed;width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;">
-<div style="background:#111;padding:30px;border-radius:15px;width:300px;text-align:center;">
-<h3 class="text-warning">Login</h3>
-<input id="user" class="form-control mb-2">
-<input id="pass" type="password" class="form-control mb-3">
-<button onclick="login()" class="btn btn-gold w-100">Login</button>
-</div>
-</div>
-
-<!-- Hero -->
 <section class="hero">
-<div>
-<h1>Hotel Booking</h1>
-<a href="#booking" class="btn btn-gold mt-3">Start</a>
-</div>
+    <div class="container fade-up show">
+        <h1>Welcome to Sripatum</h1>
+        <p class="text-light" style="letter-spacing: 4px; text-transform: uppercase; font-weight: 300;">Experience World-Class Stay</p>
+        <a href="#booking" class="btn btn-gold mt-4 px-5 py-3">Book Your Stay</a>
+    </div>
 </section>
 
-<!-- Booking -->
 <section id="booking" class="container">
+    <div class="text-center mb-5 fade-up">
+        <h2 class="text-warning display-5">Select Your Room</h2>
+        <div style="width: 60px; height: 1px; background: var(--gold); margin: 20px auto;"></div>
+    </div>
 
-<h2 class="text-center text-warning mb-4">Select Room</h2>
+    <div class="row g-4 mb-5 fade-up">
+        <div class="col-md-4">
+            <div class="room-card" onclick="selectRoom(500,'Standard')">
+                <div style="height: 250px; overflow: hidden;"><img src="j2.jpg" class="w-100 h-100 object-fit-cover"></div>
+                <div class="p-4 text-center">
+                    <h5 class="mb-2 fw-semibold">Standard Collection</h5>
+                    <p class="text-warning mb-0 fs-5">THB 500.-</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="room-card" onclick="selectRoom(1000,'Deluxe')">
+                <div style="height: 250px; overflow: hidden;"><img src="j3.jpg" class="w-100 h-100 object-fit-cover"></div>
+                <div class="p-4 text-center">
+                    <h5 class="mb-2 fw-semibold">Deluxe Experience</h5>
+                    <p class="text-warning mb-0 fs-5">THB 1,000.-</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="room-card" onclick="selectRoom(2000,'Suite')">
+                <div style="height: 250px; overflow: hidden;"><img src="j4.jpg" class="w-100 h-100 object-fit-cover"></div>
+                <div class="p-4 text-center">
+                    <h5 class="mb-2 fw-semibold">Presidential Suite</h5>
+                    <p class="text-warning mb-0 fs-5">THB 2,000.-</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="row g-4">
-
-<div class="col-md-4">
-<div class="room-card p-2" onclick="selectRoom(event,500,'Standard')">
-<img src="j2.jpg" class="img-fluid">
-<h5 class="text-center">Standard</h5>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="room-card p-2" onclick="selectRoom(event,1000,'Deluxe')">
-<img src="j3.jpg" class="img-fluid">
-<h5 class="text-center">Deluxe</h5>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="room-card p-2" onclick="selectRoom(event,2000,'Suite')">
-<img src="j4.jpg" class="img-fluid">
-<h5 class="text-center">Suite</h5>
-</div>
-</div>
-
-</div>
-
-<div class="mt-4">
-<input type="date" id="checkin" class="form-control mb-2">
-<input type="date" id="checkout" class="form-control mb-2">
-<button onclick="calculate()" class="btn btn-gold w-100">Confirm</button>
-</div>
-
-<h4 id="result" class="text-center mt-3"></h4>
-<div id="alertBox" class="mt-3"></div>
-
+    <div class="glass-panel fade-up">
+        <h4 class="text-warning mb-4"><i class="fas fa-edit me-2"></i>รายละเอียดการจอง</h4>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <label class="small text-uppercase text-warning opacity-75 mb-2">ชื่อ-นามสกุล ผู้จอง</label>
+                <input type="text" id="guestName" class="form-control" placeholder="ระบุชื่อจริง">
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="small text-uppercase text-warning opacity-75 mb-2">เบอร์โทรศัพท์</label>
+                <input type="tel" id="guestPhone" class="form-control" placeholder="08x-xxx-xxxx">
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="small text-uppercase text-warning opacity-75 mb-2">Check-in Date</label>
+                <input type="date" id="checkin" class="form-control">
+            </div>
+            <div class="col-md-6 mb-4">
+                <label class="small text-uppercase text-warning opacity-75 mb-2">Check-out Date</label>
+                <input type="date" id="checkout" class="form-control">
+            </div>
+        </div>
+        <button onclick="book()" class="btn btn-gold w-100 py-3 mt-3 fs-5">Confirm Booking</button>
+        <h5 id="result" class="text-center mt-4 text-warning fw-light"></h5>
+        <div id="alertBox" class="mt-3"></div>
+    </div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="container">
-
-<h2 class="text-center text-warning mb-5">Contact & Location</h2>
-
-<div class="row g-4">
-
-<div class="col-md-6">
-<div style="background:#111;padding:25px;border-radius:15px;border:1px solid gold;">
-<p>📧 Email: sripatum@email.com</p>
-<p>📞 Phone: 039-969-9555</p>
-
-<div class="social-box mt-3">
-<a href="https://www.instagram.com/" target="_blank" class="social-btn">
-<i class="fab fa-instagram"></i> Instagram
-</a>
-<a href="https://www.facebook.com/" target="_blank" class="social-btn">
-<i class="fab fa-facebook"></i> Facebook
-</a>
-</div>
-
-</div>
-</div>
-
-<div class="col-md-6">
-<iframe 
-src="https://www.google.com/maps?q=13.8554,100.5843&output=embed"
-style="width:100%; height:350px; border-radius:15px;">
-</iframe>
-</div>
-
-</div>
-
+<section id="contact" class="container fade-up">
+    <div class="text-center mb-5">
+        <h2 class="text-warning display-5">Contact Us</h2>
+        <div style="width: 60px; height: 1px; background: var(--gold); margin: 20px auto;"></div>
+    </div>
+    <div class="glass-panel">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5">
+                <h3 class="mb-4 text-white">Sripatum Luxury Hotel</h3>
+                <p class="text-light fw-light mb-5">Experience unparalleled luxury in the heart of the city. Our dedicated team is here to ensure your stay is flawless.</p>
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <div>
+                        <span class="text-warning d-block small uppercase">Location</span>
+                        <span class="text-white fw-light">Sripatum University, Bangkok, Thailand</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                    <i class="fas fa-phone-alt contact-icon"></i>
+                    <div>
+                        <span class="text-warning d-block small uppercase">Phone</span>
+                        <a href="tel:025791111" class="text-white fw-light text-decoration-none">02-579-1111</a>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <div>
+                        <span class="text-warning d-block small uppercase">Email</span>
+                        <span class="text-white fw-light">info@spu.ac.th</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m12!1m3!1d3874.321855648!2d100.5828453!3d13.84786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d10e0600001%3A0x77c22501a4e69d7a!2sSripatum%20University!5e0!3m2!1sen!2sth!4v1712610000000!5m2!1sen!2sth" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0; filter: grayscale(1) invert(0.9) contrast(1.2) opacity(0.8);" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- Footer -->
-<footer style="text-align:center;padding:20px;">
-<p>© 2026 Sripatum Hotel</p>
-</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyDa3v6JYir-oiEC0ordGqtXpQLL6fJ7qjc",
+    authDomain: "hotel-project-e3808.firebaseapp.com",
+    projectId: "hotel-project-e3808"
+};
 
-function showAlert(msg,type){
-    alertBox.innerHTML=`
-    <div class="alert alert-${type} alert-dismissible fade show">
-    ${msg}
-    <button class="btn-close" data-bs-dismiss="alert"></button>
-    </div>`;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+function showAlert(msg, type){
+    const alertBox = document.getElementById('alertBox');
+    alertBox.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show bg-dark text-white border-warning">${msg}<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button></div>`;
 }
 
-function login(){
-    if(user.value==="admin" && pass.value==="1234"){
-        loginPage.style.display="none";
-        showAlert("Login สำเร็จ","success");
-    }else{
-        showAlert("Login ไม่ถูกต้อง","danger");
+window.login = async function(){
+    const userEmail = document.getElementById('user').value;
+    const userPass = document.getElementById('pass').value;
+    try {
+        await signInWithEmailAndPassword(auth, userEmail, userPass);
+        showAlert("Access Granted. Redirecting...", "success");
+        setTimeout(() => { window.location.href = "admin.html"; }, 1500);
+    } catch(error) {
+        showAlert("Invalid credentials", "danger");
     }
 }
 
-function logout(){
-    loginPage.style.display="flex";
+let currentPrice = 0;
+let currentRoomName = "";
+
+window.selectRoom = function(p, name){
+    currentPrice = p;
+    currentRoomName = name;
+    document.getElementById('result').innerHTML = `Selected: <span class="text-white">${name} Collection</span>`;
+    showAlert(`You have selected the ${name} Experience.`, "info");
 }
 
-let price=0,room="";
+window.book = async function(){
+    const name = document.getElementById('guestName').value;
+    const phone = document.getElementById('guestPhone').value;
+    const cin = document.getElementById('checkin').value;
+    const cout = document.getElementById('checkout').value;
 
-function selectRoom(e,p,name){
-    price=p;
-    room=name;
+    if(!name || !phone || !cin || !cout) return showAlert("กรุณากรอกข้อมูลให้ครบทุกช่อง", "warning");
+    if(currentPrice === 0) return showAlert("กรุณาเลือกประเภทห้องก่อน", "warning");
 
-    document.querySelectorAll(".room-card").forEach(c=>c.style.border="none");
-    e.currentTarget.style.border="2px solid gold";
+    let start = new Date(cin);
+    let end = new Date(cout);
+    let diff = Math.ceil((end - start) / (1000*60*60*24));
 
-    result.innerHTML="เลือก: "+name;
+    if(diff <= 0) return showAlert("วันที่เช็คเอาท์ต้องมาหลังวันที่เช็คอิน", "danger");
+
+    let totalPrice = diff * currentPrice;
+
+    try {
+        await addDoc(collection(db, "bookings"), {
+            guestName: name,
+            guestPhone: phone,
+            room: currentRoomName,
+            nights: Number(diff),      
+            total: Number(totalPrice), 
+            status: "รอดำเนินการ",
+            checkin: cin,
+            checkout: cout,
+            createdAt: new Date().toISOString()
+        });
+
+        showAlert(`จองสำเร็จ! ยอดรวม ${totalPrice.toLocaleString()} บาท (พัก ${diff} คืน)`, "success");
+
+        document.getElementById('guestName').value = "";
+        document.getElementById('guestPhone').value = "";
+        document.getElementById('result').innerHTML = "";
+        currentPrice = 0;
+    } catch (e) {
+        console.error("Error: ", e);
+        showAlert("เกิดข้อผิดพลาด: " + e.message, "danger");
+    }
 }
-
-function calculate(){
-    let diff=(new Date(checkout.value)-new Date(checkin.value))/(1000*60*60*24);
-
-    if(price==0) return showAlert("เลือกห้องก่อน","warning");
-    if(diff<=0) return showAlert("วันไม่ถูกต้อง","danger");
-
-    result.innerHTML=`${room} | ${diff} คืน | ${diff*price} บาท`;
-    showAlert("Booking สำเร็จ","success");
-}
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<script>
+    window.addEventListener("scroll",()=>{
+        document.querySelectorAll(".fade-up").forEach(el=>{
+            let top=el.getBoundingClientRect().top;
+            if(top<window.innerHeight-70){ el.classList.add("show"); }
+        });
+    });
+</script>
 </body>
 </html>
